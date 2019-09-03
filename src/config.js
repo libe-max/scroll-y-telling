@@ -1,7 +1,7 @@
 module.exports = {
   meta: {
-    author: '',
-    title: '',
+    author: 'Maxime Fabas',
+    title: '¡ Scroll y telling !',
     url: '',
     description: '',
     image: '',
@@ -9,8 +9,8 @@ module.exports = {
   },
   tracking: {
     active: false,
-    format: 'libe-apps-template',
-    article: 'libe-apps-template'
+    format: 'scroll-y-telling',
+    article: 'scroll-y-telling'
   },
   show_header: true,
   statics_url: process.env.NODE_ENV === 'production'
@@ -19,6 +19,6 @@ module.exports = {
   api_url: process.env.NODE_ENV === 'production'
     ? 'https://libe-labo-2.site/api'
     : 'http://localhost:3004/api',
-  stylesheet: 'libe-apps-template.css', // The name of the css file hosted at ${statics_url}/styles/apps/
+  stylesheet: 'scroll-y-telling.css', // The name of the css file hosted at ${statics_url}/styles/apps/
   spreadsheet: undefined // The spreadsheet providing data to the app
 }

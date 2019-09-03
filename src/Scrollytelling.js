@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
+import Paragraph from 'libe-components/lib/text-levels/Paragraph'
 import Loader from 'libe-components/lib/blocks/Loader'
 import LoadingError from 'libe-components/lib/blocks/LoadingError'
 import ShareArticle from 'libe-components/lib/blocks/ShareArticle'
 import LibeLaboLogo from 'libe-components/lib/blocks/LibeLaboLogo'
 import ArticleMeta from 'libe-components/lib/blocks/ArticleMeta'
+import { LoremIpsum } from 'lorem-ipsum'
 
-export default class App extends Component {
+export default class Scrollytelling extends Component {
   /* * * * * * * * * * * * * * * * *
    *
    * CONSTRUCTOR
@@ -13,7 +15,7 @@ export default class App extends Component {
    * * * * * * * * * * * * * * * * */
   constructor () {
     super()
-    this.c = 'lblb-some-app'
+    this.c = 'lblb-scroll-y-telling'
     this.state = {
       loading_sheet: false,
       error_sheet: null,
@@ -21,6 +23,10 @@ export default class App extends Component {
     }
     this.fetchSheet = this.fetchSheet.bind(this)
     this.fetchCredentials = this.fetchCredentials.bind(this)
+    this.lorem = new LoremIpsum({
+      sentencesPerParagraph: { min: 4, max: 11 },
+      wordsPerSentence: { min: 4, max: 21 },
+    })
   }
 
   /* * * * * * * * * * * * * * * * *
@@ -104,21 +110,23 @@ export default class App extends Component {
 
     /* Display component */
     return <div className={classes.join(' ')}>
-      App is ready.<br />
-      - fill spreadsheet field in config.js<br />
-      - display it's content via state.data_sheet
-      <div className='lblb-default-apps-signature'>
-        <ArticleMeta publishedOn='02/09/2019 17:13' authors={[
-        { name: 'Jean-Sol Partre',
-          role: '',
-          link: 'www.liberation.fr' },
-        { name: 'Maxime Fabas',
-          role: 'Production',
-          link: 'lol.com'
-        }]} />
+      <div className={`${c}__header`}>
+        HEADER
       </div>
-      <div className='lblb-default-apps-social-and-logo'>
+
+      <div className={`${c}__content`}>{
+        this.lorem.generateParagraphs(254)
+          .split('\n')
+          .map((p, i) => <Paragraph key={i}>{p}<br /><br /></Paragraph>)
+      }</div>
+
+      <div className='lblb-default-apps-footer'>
         <ShareArticle short iconsOnly />
+        <ArticleMeta publishedOn='02/09/2019 17:13' updatedOn='03/09/2019 10:36' authors={[
+          { name: 'Jean-Sol Partre', role: '', link: 'www.liberation.fr' },
+          { name: 'Jean-Sol Partre', role: '', link: 'www.liberation.fr' },
+          { name: 'Maxime Fabas', role: 'Production', link: 'lol.com' }
+        ]} />
         <LibeLaboLogo target='blank' />
       </div>
     </div>
